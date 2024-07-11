@@ -1,4 +1,12 @@
 {
-  "start": "[${chatName}] Hi there, ${name}!",
-  "stop": "[${chatName}] Bye, ${name}!"
+  "start": "Hello there, {name}!",
+  "new": {
+    "start": "Welcome to the Warforge - battleground of the Great Gnome-Knight War. It is time you pick a side!"
+  },
+  "buttons": {
+    "class": {
+      "gnomes": "Gnomes",
+      "knights": "Knights"
+    }
+  }
 }
