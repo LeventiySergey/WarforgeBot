@@ -8,6 +8,7 @@ import { createReplyWithTextFunc } from '../services/context.js';
 import { playerContext } from '../middlewares/player.js';
 import { resolvePath } from '../helpers/resolve-path.js';
 import { startController } from '../controllers/start.js';
+import { dynamicClassController } from '../controllers/class.js';
 import { initLocaleEngine } from './locale-engine.js';
 
 function setupDefaultContext(bot: Bot, database: Database) {
@@ -18,15 +19,16 @@ function setupDefaultContext(bot: Bot, database: Database) {
   });
 }
 
-function setupMiddlewares(bot: Bot, localeEngine: I18n) {
+function setupMiddlewares(bot: Bot, i18n: I18n) {
   bot.use(session());
-  bot.use(localeEngine.middleware());
+  bot.use(i18n.middleware());
   // eslint-disable-next-line github/no-then
   bot.catch(console.error);
 }
 
-function setupControllers(bot: Bot) {
+function setupControllers(bot: Bot, i18n: I18n) {
   bot.use(startController);
+  bot.use(dynamicClassController(i18n));
   bot.use(playerContext);
 }
 
@@ -38,7 +40,7 @@ export async function startBot(database: Database) {
 
   setupDefaultContext(bot, database);
   setupMiddlewares(bot, i18n);
-  setupControllers(bot);
+  setupControllers(bot, i18n);
 
   return new Promise(resolve => bot.start({ onStart: () => resolve(undefined) }));
 }

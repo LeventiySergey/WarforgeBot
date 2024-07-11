@@ -8,7 +8,7 @@ export const startController = new Composer<DefaultContext>();
 startController.chatType('private').command('start', async ctx => {
   const player = await getPlayer({ db: ctx.db, userId: ctx.from.id });
   if (player) {
-    await ctx.text('start');
+    await ctx.text('start', { name: player.name });
   } else {
     await ctx.text(
       'new.start',

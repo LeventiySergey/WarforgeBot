@@ -5,6 +5,7 @@ export type Player = {
   name: string;
   emoji: number;
   gold: number;
+  classType: 'gnome' | 'knight';
 };
 
 export type Database = {

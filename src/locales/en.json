@@ -1,7 +1,11 @@
 {
-  "start": "Hello there, {name}!",
+  "start": "Hello there, ${name}!",
   "new": {
-    "start": "Welcome to the Warforge - battleground of the Great Gnome-Knight War. It is time you pick a side!"
+    "start": "Welcome to the Warforge - battleground of the Great Gnome-Knight War. It is time you pick a side!",
+    "intro": {
+      "gnome": "...you wake up to the gentle sway of a cart and the soft clatter of wheels on a dirt path. Sunlight filters through the forest canopy above, and the air is filled with the scents of moss and pine. The cart stops, revealing the entrance to your new home — a hidden burrow beneath an ancient oak tree. Here, your journey begins...",
+      "knight": "...you awaken to the rhythmic clanking of armor and the distant sound of a bugle call. Dawn's light casts a golden glow on the open plains. The scent of dew-covered grass and campfire smoke fills the air. The camp is abuzz with activity as knights prepare for the day's journey. You mount your steed, feeling the weight of your armor and the cool breeze. Ahead lies your destiny — the grand castle, its towers piercing the sky. Here, your journey begins..."
+    }
   },
   "buttons": {
     "class": {
