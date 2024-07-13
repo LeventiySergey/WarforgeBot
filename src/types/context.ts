@@ -1,24 +1,25 @@
-import type { Context, SessionFlavor } from 'grammy';
+import type { Api, Context, SessionFlavor } from 'grammy';
 import type { I18nContextFlavor, TemplateData } from '@grammyjs/i18n';
 
-import type { Extra } from './telegram.js';
-import type { Chat, Database, User } from './database.js';
+import type { Database, Player } from './database.js';
 
-export interface Custom<C extends Context> {
-  text: (text: string, templateData?: TemplateData, extra?: Extra) => ReturnType<C['reply']>;
-
-  dbEntities: {
-    user: User;
-    chat: Chat | null;
-  };
-
+type CustomBase<C extends Context> = {
+  text: (
+    text: string,
+    templateData?: TemplateData,
+    extra?: Parameters<Api['sendMessage']>[2],
+  ) => ReturnType<C['reply']>;
   db: Database;
-}
+};
 
-export type CustomContextMethods = Custom<Context>;
+type BaseContext = Context & I18nContextFlavor & SessionFlavor<Record<string, never>>;
 
-export type CustomContext = Context &
-  Custom<Context> &
-  I18nContextFlavor &
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  SessionFlavor<{}>;
+type ExtendedContext = BaseContext & CustomBase<BaseContext>;
+
+export type DefaultContext = ExtendedContext;
+
+export type PlayerContext = DefaultContext & {
+  dbEntities: {
+    player: Player;
+  };
+};
