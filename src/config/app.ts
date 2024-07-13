@@ -1,3 +1,6 @@
+import type { Bot } from '../types/telegram.js';
+import type { Database } from '../types/database.js';
+import { startJobs } from '../jobs/index.js';
 import { validateEnv } from '../helpers/validate-env.js';
 import { loadEnv } from '../helpers/load-env.js';
 import { connectToDb } from './database.js';
@@ -12,7 +15,7 @@ export async function startApp() {
     process.exit(1);
   }
 
-  let database;
+  let database: Database;
   try {
     database = await connectToDb();
   } catch (error) {
@@ -20,10 +23,13 @@ export async function startApp() {
     process.exit(2);
   }
 
+  let bot: Bot;
   try {
-    await startBot(database);
+    bot = await startBot(database);
   } catch (error) {
     console.error('Error occurred while starting the bot:', error);
     process.exit(3);
   }
+
+  startJobs(bot, database);
 }

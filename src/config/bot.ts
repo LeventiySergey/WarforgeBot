@@ -32,7 +32,7 @@ function setupControllers(bot: Bot, i18n: I18n) {
   bot.use(playerContext);
 }
 
-export async function startBot(database: Database) {
+export async function startBot(database: Database): Promise<Bot> {
   const localesPath = resolvePath(import.meta.url, '../locales');
   const i18n = initLocaleEngine(localesPath);
 
@@ -42,5 +42,5 @@ export async function startBot(database: Database) {
   setupMiddlewares(bot, i18n);
   setupControllers(bot, i18n);
 
-  return new Promise(resolve => bot.start({ onStart: () => resolve(undefined) }));
+  return new Promise(resolve => bot.start({ onStart: () => resolve(bot) }));
 }
