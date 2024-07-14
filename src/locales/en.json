@@ -12,5 +12,11 @@
       "gnomes": "🧙🏽 Gnomes",
       "knights": "🏰 Knights"
     }
+  },
+  "system": {
+    "wait": {
+      "gnome": "🧚🏼‍♂️ Whispers of war rustle through the underbrush, brave gnome; hold your quest until the clash of steel and spell subsides, and peace returns to our realm",
+      "knight": "⚔️ Amidst the clash of steel and spell, the kingdom's fate hangs in the balance; return when the echoes of war have faded and silence once again graces our realms"
+    }
   }
 }

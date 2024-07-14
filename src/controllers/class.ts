@@ -5,13 +5,13 @@ import type { DefaultContext } from '../types/context.js';
 import { createPlayer, getPlayer } from '../services/player.js';
 import { resolvePath } from '../helpers/resolve-path.js';
 
-export function dynamicClassController(i18n: I18n) {
-  const classController = new Composer<DefaultContext>();
+export function classController(i18n: I18n) {
+  const controller = new Composer<DefaultContext>();
 
   const gnomeButton = i18n.t('en', 'buttons.class.gnomes');
   const knightButton = i18n.t('en', 'buttons.class.knights');
 
-  classController.chatType('private').hears([gnomeButton, knightButton], async ctx => {
+  controller.chatType('private').hears([gnomeButton, knightButton], async ctx => {
     const player = await getPlayer({ db: ctx.db, userId: ctx.from.id });
     if (player) {
       return;
@@ -27,6 +27,7 @@ export function dynamicClassController(i18n: I18n) {
         emoji: 0,
         gold: 0,
         classType,
+        state: 'normal',
       },
     });
 
@@ -39,5 +40,5 @@ export function dynamicClassController(i18n: I18n) {
     );
   });
 
-  return classController;
+  return controller;
 }

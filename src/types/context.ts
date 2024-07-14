@@ -9,7 +9,9 @@ type CustomBase<C extends Context> = {
     templateData?: TemplateData,
     extra?: Parameters<Api['sendMessage']>[2],
   ) => ReturnType<C['reply']>;
+  label: (resourceKey: string, templateData?: Readonly<TemplateData>) => string;
   db: Database;
+  inWar: boolean;
 };
 
 type BaseContext = Context & I18nContextFlavor & SessionFlavor<Record<string, never>>;

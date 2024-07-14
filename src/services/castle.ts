@@ -62,7 +62,7 @@ type StatEntry = {
 };
 
 export async function performBattle(args: PerformBattleArgs) {
-  const stats = await args.db.castle
+  const stats = await args.db.player
     .aggregate<StatEntry>([
       {
         $group: {
