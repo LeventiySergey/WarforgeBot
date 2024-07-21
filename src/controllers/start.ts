@@ -1,4 +1,4 @@
-import { Composer, Keyboard } from 'grammy';
+import { Composer } from 'grammy';
 
 import type { DefaultContext } from '../types/context.js';
 import { getPlayer } from '../services/player.js';
@@ -10,14 +10,6 @@ startController.chatType('private').command('start', async ctx => {
   if (player) {
     await ctx.text('start', { name: player.name });
   } else {
-    await ctx.text(
-      'new.start',
-      {},
-      {
-        reply_markup: new Keyboard([
-          [ctx.i18n.t('buttons.class.gnomes'), ctx.i18n.t('buttons.class.knights')],
-        ]).resized(),
-      },
-    );
+    await ctx.text('new.start', {}, ctx.keyboards.chooseClass);
   }
 });

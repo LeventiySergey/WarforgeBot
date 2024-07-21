@@ -1,7 +1,10 @@
+import type { ReplyKeyboardMarkup } from 'grammy/types';
 import type { Api, Context, SessionFlavor } from 'grammy';
 import type { I18nContextFlavor, TemplateData } from '@grammyjs/i18n';
 
 import type { Database, Player } from './database.js';
+
+type ReplyKeyboardExtra = { reply_markup: ReplyKeyboardMarkup };
 
 type CustomBase<C extends Context> = {
   text: (
@@ -12,6 +15,10 @@ type CustomBase<C extends Context> = {
   label: (resourceKey: string, templateData?: Readonly<TemplateData>) => string;
   db: Database;
   inWar: boolean;
+  keyboards: {
+    mainMenu: ReplyKeyboardExtra;
+    chooseClass: ReplyKeyboardExtra;
+  };
 };
 
 type BaseContext = Context & I18nContextFlavor & SessionFlavor<Record<string, never>>;
