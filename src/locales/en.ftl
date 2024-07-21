@@ -1,6 +1,16 @@
 # Variable: $name (String)
 start = Hello there, { $name }!
 
+# Emoji
+# - Gnome
+emoji-gnome-1 = 🧙‍♀️
+emoji-gnome-2 = 🧙
+emoji-gnome-3 = 🌿
+# - Knight
+emoji-knight-1 = 🤺
+emoji-knight-2 = 🏰
+emoji-knight-3 = ⚜️
+
 # Variables: $emoji (String), $name (String), $gold (Number), $state (String)
 profile = { $emoji } { $name }
 
@@ -24,16 +34,6 @@ buttons-main-hero = 📜 Hero
 # System messages
 system-wait-gnome = 🧚🏼‍♂️ Whispers of war rustle through the underbrush, brave gnome; hold your quest until the clash of steel and spell subsides, and peace returns to our realm
 system-wait-knight = ⚔️ Amidst the clash of steel and spell, the kingdom's fate hangs in the balance; return when the echoes of war have faded and silence once again graces our realms
-
-# emoji for gnome
-emoji-gnome-1 = 🧙‍♀️
-emoji-gnome-2 = 🧙
-emoji-gnome-3 = 🌿
-
-# emoji for knight
-emoji-knight-4 = 🤺
-emoji-knight-5 = 🏰
-emoji-knight-6 = ⚜️
 
 # States for gnome
 states-gnome-normal = Works quietly in the garden, watching for knights.

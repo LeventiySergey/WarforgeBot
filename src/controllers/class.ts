@@ -17,7 +17,7 @@ async function handleClassSelection(
     return;
   }
 
-  const emoji = classType === 'gnome' ? getRandomInt(1, 3) : getRandomInt(4, 6);
+  const emoji = getRandomInt(1, 3);
 
   await createPlayer({
     db: ctx.db,
