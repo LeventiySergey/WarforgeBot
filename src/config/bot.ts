@@ -25,7 +25,7 @@ function attach(
   bot.use(middleware as unknown as Middleware);
 }
 
-function setupBot(bot: Bot, i18n: I18n) {
+function setupBot(bot: Bot, i18n: I18n<DefaultContext>) {
   bot.use(session());
   bot.use(i18n.middleware());
   // eslint-disable-next-line github/no-then

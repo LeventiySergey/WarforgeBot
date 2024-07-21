@@ -8,7 +8,7 @@ export function createKeyboards(ctx: DefaultContext) {
   });
 
   return {
-    chooseClass: keyboard([['buttons.class.gnomes', 'buttons.class.knights']]),
-    mainMenu: keyboard([['buttons.main.hero']]),
+    chooseClass: keyboard([['buttons-class-gnomes', 'buttons-class-knights']]),
+    mainMenu: keyboard([['buttons-main-hero']]),
   };
 }

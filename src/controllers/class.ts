@@ -34,7 +34,7 @@ async function handleClassSelection(
   await ctx.replyWithPhoto(
     new InputFile(resolvePath(import.meta.url, `../../assets/intro/${classType}.webp`)),
     {
-      caption: ctx.t(`new.intro.${classType}`),
+      caption: ctx.t(`new-intro-${classType}`),
       ...ctx.keyboards.mainMenu,
     },
   );
@@ -44,8 +44,8 @@ export const classController = new Composer<DefaultContext>();
 
 classController
   .chatType('private')
-  .filter(hears('buttons.class.gnomes'), async ctx => handleClassSelection(ctx, 'gnome'));
+  .filter(hears('buttons-class-gnomes'), async ctx => handleClassSelection(ctx, 'gnome'));
 
 classController
   .chatType('private')
-  .filter(hears('buttons.class.knights'), async ctx => handleClassSelection(ctx, 'knight'));
+  .filter(hears('buttons-class-knights'), async ctx => handleClassSelection(ctx, 'knight'));
