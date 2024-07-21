@@ -5,7 +5,8 @@ import type { I18n } from '@grammyjs/i18n';
 import type { Bot, Middleware } from '../types/telegram.js';
 import type { Database } from '../types/database.js';
 import type { DefaultContext, PlayerContext } from '../types/context.js';
-import { warShutdown } from '../middlewares/war.js';
+import { warShutdown } from '../middlewares/war-shutdown.js';
+import { privateChat } from '../middlewares/private-chat.js';
 import { playerContext } from '../middlewares/player.js';
 import { defaultContext } from '../middlewares/default-context.js';
 import { resolvePath } from '../helpers/resolve-path.js';
@@ -31,8 +32,9 @@ function setupBot(bot: Bot, i18n: I18n) {
   bot.catch(console.error);
 }
 
-function setupControllers(bot: Bot, db: Database) {
+function attachListeners(bot: Bot, db: Database) {
   attach(bot, defaultContext(db));
+  attach(bot, privateChat);
   attach(bot, startController);
   attach(bot, classController);
   attach(bot, playerContext);
@@ -47,7 +49,7 @@ export async function startBot(database: Database): Promise<Bot> {
   const bot = new TelegramBot<DefaultContext>(process.env.TOKEN);
 
   setupBot(bot, i18n);
-  setupControllers(bot, database);
+  attachListeners(bot, database);
 
   return new Promise(resolve => bot.start({ onStart: () => resolve(bot) }));
 }
