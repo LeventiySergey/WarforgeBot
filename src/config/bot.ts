@@ -10,6 +10,7 @@ import { playerContext } from '../middlewares/player.js';
 import { defaultContext } from '../middlewares/default-context.js';
 import { resolvePath } from '../helpers/resolve-path.js';
 import { startController } from '../controllers/start.js';
+import { profilesController } from '../controllers/profiles.js';
 import { classController } from '../controllers/class.js';
 import { initLocaleEngine } from './locale-engine.js';
 
@@ -35,6 +36,7 @@ function setupControllers(bot: Bot, db: Database, i18n: I18n) {
   attach(bot, startController);
   attach(bot, classController(i18n));
   attach(bot, playerContext);
+  attach(bot, profilesController(i18n));
   attach(bot, warShutdown);
 }
 

@@ -4,6 +4,7 @@ import type { I18n } from '@grammyjs/i18n';
 import type { DefaultContext } from '../types/context.js';
 import { createPlayer, getPlayer } from '../services/player.js';
 import { resolvePath } from '../helpers/resolve-path.js';
+import { getRandomInt } from '../helpers/randomInteger.js';
 
 export function classController(i18n: I18n) {
   const controller = new Composer<DefaultContext>();
@@ -18,13 +19,14 @@ export function classController(i18n: I18n) {
     }
 
     const classType = ctx.message.text === gnomeButton ? 'gnome' : 'knight';
+    const emoji = classType === 'gnome' ? getRandomInt(1, 3) : getRandomInt(4, 6);
 
     await createPlayer({
       db: ctx.db,
       data: {
         userId: ctx.from.id,
         name: ctx.from.username ?? 'Unnamed',
-        emoji: 0,
+        emoji,
         gold: 0,
         classType,
         state: 'normal',
@@ -35,7 +37,7 @@ export function classController(i18n: I18n) {
       new InputFile(resolvePath(import.meta.url, `../../assets/intro/${classType}.webp`)),
       {
         caption: ctx.i18n.t(`new.intro.${classType}`),
-        reply_markup: { remove_keyboard: true },
+        ...ctx.keyboards.mainMenu,
       },
     );
   });

@@ -1,5 +1,6 @@
 {
   "start": "Hello there, ${name}!",
+  "profile": "${emoji} ${name}\n\n💰 ${gold}\n\n ${state}",
   "new": {
     "start": "Welcome to the Warforge - battleground of the Great Gnome-Knight War. It is time you pick a side!",
     "intro": {
@@ -11,12 +12,41 @@
     "class": {
       "gnomes": "🧙🏽 Gnomes",
       "knights": "🏰 Knights"
+    },
+    "main": {
+      "hero": "📜 Hero"
     }
   },
   "system": {
     "wait": {
       "gnome": "🧚🏼‍♂️ Whispers of war rustle through the underbrush, brave gnome; hold your quest until the clash of steel and spell subsides, and peace returns to our realm",
       "knight": "⚔️ Amidst the clash of steel and spell, the kingdom's fate hangs in the balance; return when the echoes of war have faded and silence once again graces our realms"
+    }
+  },
+  "emojis":{
+    "gnome":{
+      "1": "🧙‍♀️",
+      "2": "🧙",
+      "3": "🌿"
+    },
+    "knight":{
+      "4": "🤺",
+      "5": "🏰",
+      "6": "⚜️"
+    }
+  },
+  "states": {
+    "gnome": {
+      "normal": "Works quietly in the garden, watching for knights.",
+      "attack": "⚔️ Attacks the knights with dagger.",
+      "defense": "🛡 Blocks a knight's attack with a shield.",
+      "quest": "🗺 Embarks on a mysterious quest."
+    },
+    "knight": {
+      "normal": "Watches over the kingdom, cautious of gnomes.",
+      "attack": "⚔️ Attacks the gnomes with sword.",
+      "defense": "🛡 Deflects a gnome's blow with a shield.",
+      "quest": "🗺 Undertakes a noble quest."
     }
   }
 }
