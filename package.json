@@ -1,14 +1,15 @@
 {
-  "name": "ts-tg-bot",
+  "name": "warforge",
   "version": "1.0.0",
-  "description": "Telegram bot template in TypeScript ",
+  "description": "Gnomes vs Knight Telegram chat bot game",
   "main": "build/index.js",
   "scripts": {
     "compile": "tsc",
+    "typecheck": "tsc --noEmit",
     "postcompile": "cp -r src/locales build",
-    "bg:start": "npm run prepare && pm2 start build/index.js --name telegram-bot",
-    "bg:restart": "npm run prepare && pm2 restart telegram-bot",
-    "bg:logs": "pm2 logs telegram-bot --lines 1000 -f",
+    "bg:start": "npm run prepare && pm2 start build/index.js --name warforge",
+    "bg:restart": "npm run prepare && pm2 restart warforge",
+    "bg:logs": "pm2 logs warforge --lines 1000 -f",
     "start": "npm run compile && node .",
     "lint": "npx eslint .",
     "lint:fix": "npm run lint -- --fix"
@@ -18,12 +19,15 @@
     "bot",
     "grammy",
     "mongodb",
-    "typescript"
+    "typescript",
+    "game",
+    "gnomes",
+    "knights"
   ],
   "author": "ExposedCat",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@grammyjs/i18n": "^0.5.1",
+    "@grammyjs/i18n": "^1.0.2",
     "dotenv": "^16.0.1",
     "grammy": "^1.24.1",
     "mongodb": "^4.9.1",

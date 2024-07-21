@@ -16,7 +16,7 @@ export const warShutdown = new Composer<PlayerContext>();
 
 warShutdown.chatType('private').on('message', async (ctx: PlayerContext, next: NextFunction) => {
   if (isInWar()) {
-    await ctx.text(`system.wait.${ctx.dbEntities.player.classType}`);
+    await ctx.text(`system-wait-${ctx.dbEntities.player.classType}`);
   } else {
     await next();
   }

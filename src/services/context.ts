@@ -6,7 +6,7 @@ export function createReplyWithTextFunc(ctx: DefaultContext): DefaultContext['te
     extra.link_preview_options = {
       is_disabled: true,
     };
-    const text = ctx.i18n.t(resourceKey, templateData);
+    const text = ctx.t(resourceKey, templateData);
     return ctx.reply(text, extra);
   };
 }
