@@ -12,7 +12,6 @@ type CustomBase<C extends Context> = {
     templateData?: TranslationVariables,
     extra?: Parameters<Api['sendMessage']>[2],
   ) => ReturnType<C['reply']>;
-  label: (resourceKey: string, templateData?: TranslationVariables) => string;
   db: Database;
   inWar: boolean;
   keyboards: {
