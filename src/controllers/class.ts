@@ -1,4 +1,5 @@
 import { Composer, InputFile } from 'grammy';
+import type { ChatTypeContext } from 'grammy';
 import { hears } from '@grammyjs/i18n';
 
 import type { Player } from '../types/database.js';
@@ -7,8 +8,11 @@ import { createPlayer, getPlayer } from '../services/player.js';
 import { resolvePath } from '../helpers/resolve-path.js';
 import { getRandomInt } from '../helpers/randomInteger.js';
 
-async function handleClassSelection(ctx: DefaultContext, classType: Player['classType']) {
-  const player = await getPlayer({ db: ctx.db, userId: ctx.from!.id });
+async function handleClassSelection(
+  ctx: ChatTypeContext<DefaultContext, 'private'>,
+  classType: Player['classType'],
+) {
+  const player = await getPlayer({ db: ctx.db, userId: ctx.from.id });
   if (player) {
     return;
   }
@@ -18,8 +22,8 @@ async function handleClassSelection(ctx: DefaultContext, classType: Player['clas
   await createPlayer({
     db: ctx.db,
     data: {
-      userId: ctx.from!.id,
-      name: ctx.from!.username ?? 'Unnamed',
+      userId: ctx.from.id,
+      name: ctx.from.username ?? 'Unnamed',
       emoji,
       gold: 0,
       classType,
