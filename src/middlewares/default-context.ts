@@ -7,16 +7,16 @@ import { createReplyWithTextFunc } from '../services/context.js';
 export function defaultContext(db: Database) {
   return async (ctx: DefaultContext, next: NextFunction) => {
     ctx.text = createReplyWithTextFunc(ctx);
-    ctx.label = ctx.i18n.t;
+    ctx.label = ctx.t;
     ctx.db = db;
     ctx.keyboards = {
       chooseClass: {
         reply_markup: new Keyboard([
-          [ctx.i18n.t('buttons.class.gnomes'), ctx.i18n.t('buttons.class.knights')],
+          [ctx.t('buttons.class.gnomes'), ctx.t('buttons.class.knights')],
         ]).resized(),
       },
       mainMenu: {
-        reply_markup: new Keyboard([[ctx.i18n.t('buttons.main.hero')]]).resized(),
+        reply_markup: new Keyboard([[ctx.t('buttons.main.hero')]]).resized(),
       },
     };
 

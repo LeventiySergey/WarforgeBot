@@ -8,7 +8,7 @@ import { resolvePath } from '../helpers/resolve-path.js';
 import { getRandomInt } from '../helpers/randomInteger.js';
 
 async function handleClassSelection(ctx: DefaultContext, classType: Player['classType']) {
-  const player = await getPlayer({ db: ctx.db, userId: ctx.from.id });
+  const player = await getPlayer({ db: ctx.db, userId: ctx.from!.id });
   if (player) {
     return;
   }
@@ -18,8 +18,8 @@ async function handleClassSelection(ctx: DefaultContext, classType: Player['clas
   await createPlayer({
     db: ctx.db,
     data: {
-      userId: ctx.from.id,
-      name: ctx.from.username ?? 'Unnamed',
+      userId: ctx.from!.id,
+      name: ctx.from!.username ?? 'Unnamed',
       emoji,
       gold: 0,
       classType,
@@ -30,7 +30,7 @@ async function handleClassSelection(ctx: DefaultContext, classType: Player['clas
   await ctx.replyWithPhoto(
     new InputFile(resolvePath(import.meta.url, `../../assets/intro/${classType}.webp`)),
     {
-      caption: ctx.i18n.t(`new.intro.${classType}`),
+      caption: ctx.t(`new.intro.${classType}`),
       ...ctx.keyboards.mainMenu,
     },
   );

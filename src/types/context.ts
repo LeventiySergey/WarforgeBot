@@ -1,6 +1,6 @@
 import type { ReplyKeyboardMarkup } from 'grammy/types';
 import type { Api, Context, SessionFlavor } from 'grammy';
-import type { I18nContextFlavor, TemplateData } from '@grammyjs/i18n';
+import type { I18nFlavor, TranslationVariables } from '@grammyjs/i18n';
 
 import type { Database, Player } from './database.js';
 
@@ -9,10 +9,10 @@ type ReplyKeyboardExtra = { reply_markup: ReplyKeyboardMarkup };
 type CustomBase<C extends Context> = {
   text: (
     text: string,
-    templateData?: TemplateData,
+    templateData?: TranslationVariables,
     extra?: Parameters<Api['sendMessage']>[2],
   ) => ReturnType<C['reply']>;
-  label: (resourceKey: string, templateData?: Readonly<TemplateData>) => string;
+  label: (resourceKey: string, templateData?: TranslationVariables) => string;
   db: Database;
   inWar: boolean;
   keyboards: {
@@ -21,7 +21,7 @@ type CustomBase<C extends Context> = {
   };
 };
 
-type BaseContext = Context & I18nContextFlavor & SessionFlavor<Record<string, never>>;
+type BaseContext = Context & I18nFlavor & SessionFlavor<Record<string, never>>;
 
 type ExtendedContext = BaseContext & CustomBase<BaseContext>;
 
