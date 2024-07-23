@@ -12,6 +12,7 @@ import { defaultContext } from '../middlewares/default-context.js';
 import { resolvePath } from '../helpers/resolve-path.js';
 import { warStateController } from '../controllers/war-state.js';
 import { startController } from '../controllers/start.js';
+import { questController } from '../controllers/quest.js';
 import { profileController } from '../controllers/profiles.js';
 import { classController } from '../controllers/class.js';
 import { initLocaleEngine } from './locale-engine.js';
@@ -37,13 +38,14 @@ function attachListeners(bot: Bot, db: Database) {
   attach(bot, defaultContext(db));
   attach(bot, privateChat);
   // Private Message
-  attach(bot, warShutdown);
   attach(bot, startController);
+  attach(bot, warShutdown);
   attach(bot, classController);
   attach(bot, playerContext);
   // Player
   attach(bot, warStateController);
   attach(bot, profileController);
+  attach(bot, questController);
 }
 
 export async function startBot(database: Database): Promise<Bot> {
