@@ -9,6 +9,9 @@ export function createKeyboards(ctx: DefaultContext) {
 
   return {
     chooseClass: keyboard([['buttons-class-gnomes', 'buttons-class-knights']]),
-    mainMenu: keyboard([['buttons-main-hero']]),
+    mainMenu: keyboard([
+      ['buttons-main-hero', `buttons-main-quest`],
+      ['buttons-main-attack', `buttons-main-defense`],
+    ]),
   };
 }

@@ -35,3 +35,15 @@ export async function updatePlayerGold(args: UpdatePlayerGoldArgs) {
       : { $inc: { gold } },
   );
 }
+
+export type UpdatePlayerStateArgs = {
+  db: Database;
+  userId: number;
+  state: Player['state'];
+};
+
+export async function updatePlayerState(args: UpdatePlayerStateArgs) {
+  const { db, userId, state } = args;
+
+  return db.player.updateOne({ userId }, { $set: { state } });
+}

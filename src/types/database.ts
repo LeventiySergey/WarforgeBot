@@ -6,7 +6,7 @@ export type Player = {
   emoji: number;
   gold: number;
   classType: 'gnome' | 'knight';
-  state: 'normal' | 'attack' | 'defence';
+  state: 'normal' | 'attack' | 'defense' | 'quest';
 };
 
 export type Castle = {

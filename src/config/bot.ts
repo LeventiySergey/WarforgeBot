@@ -10,6 +10,7 @@ import { privateChat } from '../middlewares/private-chat.js';
 import { playerContext } from '../middlewares/player.js';
 import { defaultContext } from '../middlewares/default-context.js';
 import { resolvePath } from '../helpers/resolve-path.js';
+import { warStateController } from '../controllers/war-state.js';
 import { startController } from '../controllers/start.js';
 import { profileController } from '../controllers/profiles.js';
 import { classController } from '../controllers/class.js';
@@ -35,11 +36,14 @@ function setupBot(bot: Bot, i18n: I18n<DefaultContext>) {
 function attachListeners(bot: Bot, db: Database) {
   attach(bot, defaultContext(db));
   attach(bot, privateChat);
+  // Private Message
+  attach(bot, warShutdown);
   attach(bot, startController);
   attach(bot, classController);
   attach(bot, playerContext);
+  // Player
+  attach(bot, warStateController);
   attach(bot, profileController);
-  attach(bot, warShutdown);
 }
 
 export async function startBot(database: Database): Promise<Bot> {

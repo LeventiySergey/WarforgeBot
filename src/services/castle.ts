@@ -84,16 +84,16 @@ export async function performBattle(args: PerformBattleArgs) {
   const result = {
     knight: {
       attack: 0,
-      defence: 0,
+      defense: 0,
     },
     gnome: {
       attack: 0,
-      defence: 0,
+      defense: 0,
     },
   };
 
   for (const entry of stats) {
-    if (entry._id.state === 'normal') {
+    if (entry._id.state !== 'defense' && entry._id.state !== 'attack') {
       continue;
     }
     result[entry._id.classType][entry._id.state] = entry.count;
