@@ -12,9 +12,10 @@ emoji-knight-2 = 🏰
 emoji-knight-3 = ⚜️
 
 # Profile
-# Variables: $emoji (String), $name (String), $gold (Number), $state (String)
+# Variables: $emoji (String), $name (String), $gold (Number), $stamina (Number), $state (String)
 profile = { $emoji } { $name }
 
+          ⚡️ Stamina: { $stamina }
           💰 { $gold }
 
           { $state }
@@ -37,9 +38,15 @@ buttons-main-attack = ⚔️ Attack
 buttons-main-defense = 🛡 Defense
 
 # System messages
-# - War
-system-wait-gnome = 🧚🏼‍♂️ Whispers of war rustle through the underbrush, brave gnome; hold your quest until the clash of steel and spell subsides, and peace returns to our realm
-system-wait-knight = ⚔️ Amidst the clash of steel and spell, the kingdom's fate hangs in the balance; return when the echoes of war have faded and silence once again graces our realms
+# - Wait
+# - - Quest
+system-wait-quest-gnome = 🌲 You are venturing into the enchanted forest. Wait until you come back to start another action
+system-wait-quest-knight = 🕯 You are patrolling the ancient dungeon. Wait until you come back to start another action
+# - - Stamina
+system-wait-stamina = ⏳ You're exhausted from your journey. Time to rest
+# - - War
+system-wait-war-gnome = 🧚🏼‍♂️ Whispers of war rustle through the underbrush, brave gnome; hold your quest until the clash of steel and spell subsides, and peace returns to our realm
+system-wait-war-knight = ⚔️ Amidst the clash of steel and spell, the kingdom's fate hangs in the balance; return when the echoes of war have faded and silence once again graces our realms
 # - Results
 # - - State
 system-state-gnome-defense = 🛡️ You defend the mystical realm, ancient trees whispering their support
@@ -100,7 +107,7 @@ quest-knight-negative-10 = You crossed a bridge that seemed sturdy, but halfway 
 
 # State
 # - Gnome
-states-gnome-normal = 🪑 Taking a break
+states-gnome-normal = 💤 Taking a break
 states-gnome-attack = ⚔️ Raiding the castle
 states-gnome-defense = 🛡️ Protecting the grove
 states-gnome-quest = 🌲 Venturing into the enchanted forest

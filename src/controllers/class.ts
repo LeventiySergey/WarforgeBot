@@ -28,6 +28,9 @@ async function handleClassSelection(
       gold: 0,
       classType,
       state: 'normal',
+      maxStamina: 5,
+      stamina: 5,
+      staminaUsedAt: null,
     },
   });
 

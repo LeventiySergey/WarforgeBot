@@ -2,7 +2,7 @@ import { Composer } from 'grammy';
 import { hears } from '@grammyjs/i18n';
 
 import type { PlayerContext } from '../types/context.js';
-import { updatePlayerGold } from '../services/player.js';
+import { updatePlayer } from '../services/player.js';
 import { getRandomInt } from '../helpers/randomInteger.js';
 
 export const questController = new Composer<PlayerContext>();
@@ -10,7 +10,14 @@ export const questController = new Composer<PlayerContext>();
 questController.chatType('private').filter(hears('buttons-main-quest'), async ctx => {
   const { player } = ctx.dbEntities;
 
-  // TODO: stamina
+  await updatePlayer({
+    db: ctx.db,
+    userId: ctx.from.id,
+    increase: { stamina: -1 },
+    set: { staminaUsedAt: player.staminaUsedAt ?? new Date() },
+  });
+
+  // TODO: Busy delay
 
   const result = getRandomInt(0, 1) === 0 ? 'positive' : 'negative';
   const story = getRandomInt(1, 10);
@@ -21,10 +28,12 @@ questController.chatType('private').filter(hears('buttons-main-quest'), async ct
     newGold = player.gold;
   }
 
-  await updatePlayerGold({
+  await updatePlayer({
     db: ctx.db,
     userId: ctx.from.id,
-    gold: newGold * sign,
+    increase: {
+      gold: newGold * sign,
+    },
   });
 
   await ctx.text(`quest-${player.classType}-${result}-${story}`, { gold: newGold });

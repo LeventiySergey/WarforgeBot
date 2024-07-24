@@ -5,10 +5,11 @@ import type { I18n } from '@grammyjs/i18n';
 import type { Bot, Middleware } from '../types/telegram.js';
 import type { Database } from '../types/database.js';
 import type { DefaultContext, PlayerContext } from '../types/context.js';
-import { warShutdown } from '../middlewares/war-shutdown.js';
+import { staminaUpdater } from '../middlewares/stamina.js';
 import { privateChat } from '../middlewares/private-chat.js';
 import { playerContext } from '../middlewares/player.js';
 import { defaultContext } from '../middlewares/default-context.js';
+import { staminaBlocker, stateBlocker, warBlocker } from '../middlewares/blocker.js';
 import { resolvePath } from '../helpers/resolve-path.js';
 import { warStateController } from '../controllers/war-state.js';
 import { startController } from '../controllers/start.js';
@@ -17,12 +18,12 @@ import { profileController } from '../controllers/profiles.js';
 import { classController } from '../controllers/class.js';
 import { initLocaleEngine } from './locale-engine.js';
 
-function attach(
+function attach<C extends DefaultContext>(
   bot: Bot,
   middleware:
     | Composer<DefaultContext>
     | Composer<PlayerContext>
-    | ((ctx: DefaultContext | PlayerContext, next: NextFunction) => Promise<void> | void),
+    | ((ctx: C, next: NextFunction) => Promise<void> | void),
 ) {
   bot.use(middleware as unknown as Middleware);
 }
@@ -39,12 +40,15 @@ function attachListeners(bot: Bot, db: Database) {
   attach(bot, privateChat);
   // Private Message
   attach(bot, startController);
-  attach(bot, warShutdown);
   attach(bot, classController);
   attach(bot, playerContext);
   // Player
-  attach(bot, warStateController);
+  attach(bot, warBlocker);
+  attach(bot, staminaUpdater);
   attach(bot, profileController);
+  attach(bot, stateBlocker);
+  attach(bot, staminaBlocker);
+  attach(bot, warStateController);
   attach(bot, questController);
 }
 

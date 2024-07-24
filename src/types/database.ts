@@ -7,6 +7,9 @@ export type Player = {
   gold: number;
   classType: 'gnome' | 'knight';
   state: 'normal' | 'attack' | 'defense' | 'quest';
+  maxStamina: number;
+  stamina: number;
+  staminaUsedAt: Date | null;
 };
 
 export type Castle = {

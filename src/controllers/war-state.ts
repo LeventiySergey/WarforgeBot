@@ -3,7 +3,7 @@ import type { ChatTypeContext } from 'grammy';
 import { hears } from '@grammyjs/i18n';
 
 import type { PlayerContext } from '../types/context.js';
-import { updatePlayerState } from '../services/player.js';
+import { updatePlayer } from '../services/player.js';
 
 export const warStateController = new Composer<PlayerContext>();
 
@@ -13,7 +13,11 @@ async function handleStateChange(
 ) {
   const { player } = ctx.dbEntities;
 
-  await updatePlayerState({ db: ctx.db, userId: ctx.from.id, state });
+  await updatePlayer({
+    db: ctx.db,
+    userId: ctx.from.id,
+    set: { state },
+  });
   await ctx.text(`system-state-${player.classType}-${state}`);
 }
 

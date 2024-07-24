@@ -12,6 +12,7 @@ profileController.chatType('private').filter(hears('buttons-main-hero'), async c
     emoji: ctx.t(`emoji-${player.classType}-${player.emoji}`),
     name: player.name,
     gold: player.gold,
+    stamina: player.stamina,
     state: ctx.t(`states-${player.classType}-${player.state}`),
   });
 });

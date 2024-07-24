@@ -1,3 +1,5 @@
+import type { NumericType, OnlyFieldsOfType } from 'mongodb';
+
 import type { Database, Player } from '../types/database.js';
 
 export type CreatePlayerArgs = {
@@ -18,32 +20,36 @@ export async function getPlayer(args: GetPlayerArgs) {
   return args.db.player.findOne({ userId: args.userId });
 }
 
-export type UpdatePlayerGoldArgs = {
+export type UpdatePlayerArgs = {
   db: Database;
   userId: number;
-  gold: number;
-  set?: boolean;
+  increase?: OnlyFieldsOfType<Omit<Player, 'userId'>, NumericType | undefined>;
+  set?: Partial<Omit<Player, 'userId'>>;
 };
 
-export async function updatePlayerGold(args: UpdatePlayerGoldArgs) {
-  const { db, userId, gold, set } = args;
+export async function updatePlayer(args: UpdatePlayerArgs) {
+  const { db, userId, increase = {}, set = {} } = args;
 
   return db.player.updateOne(
     { userId },
-    set //
-      ? { $set: { gold } }
-      : { $inc: { gold } },
+    {
+      $set: set,
+      $inc: increase,
+    },
   );
 }
 
-export type UpdatePlayerStateArgs = {
-  db: Database;
-  userId: number;
-  state: Player['state'];
-};
+export async function getUpdatePlayer(args: UpdatePlayerArgs) {
+  const { db, userId, increase = {}, set = {} } = args;
 
-export async function updatePlayerState(args: UpdatePlayerStateArgs) {
-  const { db, userId, state } = args;
+  const result = await db.player.findOneAndUpdate(
+    { userId },
+    {
+      $set: set,
+      $inc: increase,
+    },
+    { returnDocument: 'after' },
+  );
 
-  return db.player.updateOne({ userId }, { $set: { state } });
+  return result.value;
 }
