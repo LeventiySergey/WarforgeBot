@@ -2,6 +2,7 @@ import { Composer } from 'grammy';
 import { hears } from '@grammyjs/i18n';
 
 import type { PlayerContext } from '../types/context.js';
+import { performBattle } from '../services/castle.js';
 
 export const profileController = new Composer<PlayerContext>();
 
@@ -15,4 +16,8 @@ profileController.chatType('private').filter(hears('buttons-main-hero'), async c
     stamina: player.stamina,
     state: ctx.t(`states-${player.classType}-${player.state}`),
   });
+
+  const stats = await performBattle({ db: ctx.db });
+  // TODO:
+  console.log(stats);
 });

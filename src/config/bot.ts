@@ -47,8 +47,8 @@ function attachListeners(bot: Bot, db: Database) {
   attach(bot, staminaUpdater);
   attach(bot, profileController);
   attach(bot, stateBlocker);
-  attach(bot, staminaBlocker);
   attach(bot, warStateController);
+  attach(bot, staminaBlocker);
   attach(bot, questController);
 }
 
